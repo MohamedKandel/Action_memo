@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">مذكرات</string>
+    <string name="add_new">اضافة مذكرة</string>
+    <string name="home">الرئيسة</string>
+    <string name="profile">الصفحة الشخصية</string>
+    <string name="settings">الاعدادات</string>
+    <string name="about">حول التطبيق</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="open">فتح</string>
+    <string name="close">غلق</string>
+</resources>
