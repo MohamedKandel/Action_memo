@@ -31,6 +31,10 @@ class HelperClass {
         this.context = fragment.requireContext()
     }
 
+    constructor(context: Context) {
+        this.context = context
+    }
+
     fun hideView(viewID: Int) {
         val view: View = activity.findViewById(viewID)
         view.visibility = View.GONE

@@ -14,4 +14,8 @@
     </style>
 
     <style name="Theme.ActionMemo" parent="Base.Theme.ActionMemo" />
+
+    <style name="BlackTextView">
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
