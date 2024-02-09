@@ -10,4 +10,9 @@
     <string name="open">فتح</string>
     <string name="close">غلق</string>
     <string name="hello">مرحبًا</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="password">كلمة المرور</string>
+    <string name="register">تسجيل مستخدم</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="or">أو</string>
 </resources>

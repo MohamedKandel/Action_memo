@@ -32,12 +32,13 @@
                     android:padding="@dimen/_10ssp"
                     android:text="@string/hello"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_30ssp" />
+                    android:textSize="@dimen/_32ssp" />
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/title_txt"
                 style="@style/BlackTextView"
+                android:layout_marginBottom="@dimen/_100ssp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_layout"
@@ -45,13 +46,111 @@
                 android:layout_marginTop="@dimen/_30ssp"
                 android:fontFamily="@font/titan_one_regular"
                 android:text="@string/app_name"
-                android:textSize="@dimen/_25ssp" />
+                android:textSize="@dimen/_27ssp" />
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/user_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title_txt"
-                android:id="@+id/mode_switch"/>
+                android:layout_margin="@dimen/_5ssp"
+                android:hint="@string/username"
+                android:layoutDirection="locale"
+                android:textDirection="locale"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/_7ssp"
+                    android:fontFamily="@font/inter_regular"
+                    android:inputType="text"
+                    android:textSize="@dimen/_13ssp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pass_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_layout"
+                android:layout_margin="@dimen/_5ssp"
+                android:hint="@string/password"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/lock">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/_7ssp"
+                    android:textSize="@dimen/_13ssp"
+                    android:fontFamily="@font/inter_regular"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pass_layout"
+                android:layout_marginStart="@dimen/_10ssp"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_marginBottom="@dimen/_10ssp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:paddingStart="@dimen/_18ssp"
+                android:paddingTop="@dimen/_10ssp"
+                android:paddingEnd="@dimen/_18ssp"
+                android:paddingBottom="@dimen/_10ssp"
+                android:text="@string/register"
+                app:cornerRadius="@dimen/_7ssp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pass_layout"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:layout_marginBottom="@dimen/_10ssp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:paddingStart="@dimen/_18ssp"
+                android:paddingTop="@dimen/_10ssp"
+                android:paddingEnd="@dimen/_18ssp"
+                android:paddingBottom="@dimen/_10ssp"
+                android:text="@string/login"
+                android:textColor="@color/my_light_primary"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="@dimen/_7ssp"
+                app:strokeColor="@color/my_light_primary"
+                app:strokeWidth="@dimen/_1ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/or"
+                android:layout_below="@+id/btn_register"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/_16ssp"
+                android:id="@+id/txt_or"
+                android:fontFamily="@font/inter_regular"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/google"
+                android:layout_below="@+id/txt_or"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:id="@+id/btn_google"
+                android:contentDescription="@string/register"/>
+
+
         </RelativeLayout>
 
     </ScrollView>
