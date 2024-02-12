@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_note"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_marginStart="@dimen/_7ssp"
+        android:layout_marginTop="@dimen/_7ssp"
+        android:layout_marginEnd="@dimen/_7ssp"
+        android:layout_marginBottom="@dimen/_7ssp"
+        app:cardCornerRadius="@dimen/_10ssp"
+        app:contentPadding="@dimen/_10ssp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textDirection="locale"
+            android:layoutDirection="locale">
+
+            <TextView
+                android:id="@+id/note_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titan_one_regular"
+                android:text="@string/hello"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_25ssp" />
+
+            <TextView
+                android:id="@+id/note_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/note_title"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/hello"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

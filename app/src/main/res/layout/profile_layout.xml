@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    style="@style/nav_style">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/_80ssp"
+        android:layout_height="@dimen/_80ssp"
         android:src="@drawable/ic_launcher_background"
         android:id="@+id/img"
+        android:layout_margin="@dimen/_10ssp"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/logout"
         android:layout_below="@+id/img"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/_5ssp"
+        android:id="@+id/txt_username"
+        android:layout_marginBottom="@dimen/_30ssp"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/titan_one_regular"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>

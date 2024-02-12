@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LoginFragment">
+    tools:context=".ui.LoginFragment"
+    style="@style/MAIN_Layout">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
                 android:id="@+id/header_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/header_drawable"
+                style="@style/HeaderBG"
                 android:padding="@dimen/_20ssp">
 
                 <TextView
@@ -97,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pass_layout"
+                android:layout_alignParentStart="true"
                 android:layout_marginStart="@dimen/_10ssp"
                 android:layout_marginTop="@dimen/_10ssp"
                 android:layout_marginBottom="@dimen/_10ssp"
@@ -117,39 +119,9 @@
                 android:layout_marginTop="@dimen/_10ssp"
                 android:layout_marginEnd="@dimen/_10ssp"
                 android:layout_marginBottom="@dimen/_10ssp"
-                android:fontFamily="@font/inter_semi_bold"
-                android:paddingStart="@dimen/_18ssp"
-                android:paddingTop="@dimen/_10ssp"
-                android:paddingEnd="@dimen/_18ssp"
-                android:paddingBottom="@dimen/_10ssp"
                 android:text="@string/login"
-                android:textColor="@color/my_light_primary"
-                app:backgroundTint="@color/white"
-                app:cornerRadius="@dimen/_7ssp"
-                app:strokeColor="@color/my_light_primary"
-                app:strokeWidth="@dimen/_1ssp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/or"
-                android:layout_below="@+id/btn_register"
-                android:layout_centerInParent="true"
-                android:textSize="@dimen/_16ssp"
-                android:id="@+id/txt_or"
-                android:fontFamily="@font/inter_regular"/>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/google"
-                android:layout_below="@+id/txt_or"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="@dimen/_10ssp"
-                android:id="@+id/btn_google"
-                android:contentDescription="@string/register"/>
-
+                android:fontFamily="@font/inter_semi_bold"
+                style="@style/WhiteBtnStyle"/>
 
         </RelativeLayout>
 

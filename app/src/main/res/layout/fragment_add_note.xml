@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MAIN_Layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddNoteFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="locale"
+            android:textDirection="locale">
+
+            <include layout="@layout/transparent_toolbar"
+                android:id="@+id/toolbar"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/title_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/toolbar"
+                android:layout_margin="@dimen/_7ssp"
+                android:hint="@string/title"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/titan_one_regular"
+                    android:gravity="start"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/body_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_layout"
+                android:layout_margin="@dimen/_7ssp"
+                android:hint="@string/body"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="start"
+                    android:inputType="textMultiLine"
+                    android:lines="8" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_priority_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/body_layout">
+
+                <ImageButton
+                    android:id="@+id/btn_priority_3"
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="@dimen/_7ssp"
+                    android:background="@drawable/check_box_3"
+                    android:src="@drawable/check_box_3" />
+
+                <TextView
+                    android:id="@+id/txt_priority_3"
+                    style="@style/priority_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/btn_priority_3"
+                    android:text="@string/priority_3" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_priority_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_priority_3">
+
+                <ImageButton
+                    android:id="@+id/btn_priority_2"
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="@dimen/_7ssp"
+                    android:background="@drawable/check_box_2"
+                    android:src="@drawable/check_box_2" />
+
+                <TextView
+                    android:id="@+id/txt_priority_2"
+                    style="@style/priority_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/btn_priority_2"
+                    android:text="@string/priority_2" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_priority_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_priority_2">
+
+                <ImageButton
+                    android:id="@+id/btn_priority_1"
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="@dimen/_7ssp"
+                    android:background="@drawable/check_box_1"
+                    android:src="@drawable/check_box_1" />
+
+                <TextView
+                    android:id="@+id/txt_priority_1"
+                    style="@style/priority_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/btn_priority_1"
+                    android:text="@string/priority_1" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_priority_0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_priority_1">
+
+                <ImageButton
+                    android:id="@+id/btn_priority_0"
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="@dimen/_7ssp"
+                    android:background="@drawable/check_box_0"
+                    android:src="@drawable/check_box_0" />
+
+                <TextView
+                    android:id="@+id/txt_priority_0"
+                    style="@style/priority_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/btn_priority_0"
+                    android:text="@string/priority_0" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_priority_0"
+                android:layout_marginStart="@dimen/_10ssp"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:layout_marginBottom="@dimen/_10ssp"
+                android:fontFamily="@font/titan_one_regular"
+                android:paddingTop="@dimen/_10ssp"
+                android:paddingBottom="@dimen/_10ssp"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_15ssp"
+                app:cornerRadius="@dimen/_7ssp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                style="@style/WhiteBtnStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_save"
+                android:layout_marginStart="@dimen/_10ssp"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:layout_marginBottom="@dimen/_10ssp"
+                android:fontFamily="@font/titan_one_regular"
+                android:paddingTop="@dimen/_10ssp"
+                android:paddingBottom="@dimen/_10ssp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_15ssp" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

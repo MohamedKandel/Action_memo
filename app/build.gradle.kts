@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -39,6 +41,8 @@ android {
 }
 
 dependencies {
+    val latest_version = "2.7.0"
+    val room_version = "2.6.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -48,13 +52,27 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
-    // data store dependency
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("com.intuit.sdp:sdp-android:1.1.0")
+    // shared prefs
+    implementation ("androidx.preference:preference-ktx:1.2.1")
     // ViewModel
-    val latest_version = "2.7.0"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$latest_version")
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$latest_version")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$latest_version")
     implementation("androidx.core:core-ktx:1.12.0")
+    // Room db
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    // To use Kotlin Symbol Processing (KSP)
+    ksp("androidx.room:room-compiler:$room_version")
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
+    // circular imageView
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 }

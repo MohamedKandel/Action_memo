@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="dark_black">#121212</color>
     <color name="white">#FFFFFFFF</color>
     <color name="my_light_primary">#9D00FE</color>
     <color name="my_dark_primary">#B846FF</color>
+    <color name="gray">#858585</color>
+    <color name="priority_0">#FAFBBA</color>
+    <color name="priority_1">#C3FBBA</color>
+    <color name="priority_2">#BABCFB</color>
+    <color name="priority_3">#FBBABA</color>
 </resources>
