@@ -20,4 +20,10 @@ interface DAO {
 
     @Query("select * from notes where userId= :userId")
     suspend fun getNotes(userId: String): List<Note>
+
+    @Query("update notes set title= :title, body= :body, priority= :priority where id = :id")
+    suspend fun updateNoteByID(title: String, body: String, priority: Int, id: Int)
+
+    @Query("delete from notes where userId= :userId")
+    suspend fun deleteAllNotes(userId: String)
 }

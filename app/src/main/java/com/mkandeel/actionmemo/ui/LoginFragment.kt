@@ -2,6 +2,7 @@ package com.mkandeel.actionmemo.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -50,6 +51,8 @@ class LoginFragment : Fragment(), ClickListener {
         notesDB = NotesDB.getDBInstace(requireContext())
         helper.hideActionBar()
         onBackPressed()
+
+        binding.txtUsername.requestFocus()
 
         users = ArrayList<User>()
 

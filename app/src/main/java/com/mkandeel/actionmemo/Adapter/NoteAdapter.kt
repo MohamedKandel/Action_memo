@@ -16,6 +16,7 @@ import com.mkandeel.actionmemo.Helper.Constants
 import com.mkandeel.actionmemo.Helper.Constants.CLICKED
 import com.mkandeel.actionmemo.Helper.Constants.DELETE
 import com.mkandeel.actionmemo.Helper.Constants.EDIT
+import com.mkandeel.actionmemo.Helper.Constants.NOTE
 import com.mkandeel.actionmemo.R
 import com.mkandeel.actionmemo.Room.notes.Note
 
@@ -60,24 +61,31 @@ class NoteAdapter(
             txt_body = itemView.findViewById<TextView>(R.id.note_body)
             card = itemView.findViewById<CardView>(R.id.card_note)
 
+
+            val bundle = Bundle()
+
             itemView.setOnClickListener {
-                listener.onItemClickListener(adapterPosition, null)
+                val noteObj = list[adapterPosition]
+                bundle.putParcelable(NOTE, noteObj)
+                listener.onItemClickListener(adapterPosition, bundle)
             }
             itemView.setOnLongClickListener {
-                val extras:Bundle = Bundle()
+                val extras: Bundle = Bundle()
                 val popupMenu = PopupMenu(context, itemView)
                 popupMenu.menuInflater.inflate(R.menu.options_menu, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener {
-                    when(it.itemId) {
+                    when (it.itemId) {
                         R.id.edit_note -> {
                             extras.putString(CLICKED, EDIT)
                             //Toast.makeText(context,context.resources.getString(R.string.edit), Toast.LENGTH_SHORT).show()
                         }
+
                         R.id.delete_note -> {
                             extras.putString(CLICKED, DELETE)
                             //Toast.makeText(context,context.resources.getString(R.string.delete_note), Toast.LENGTH_SHORT).show()
                         }
                     }
+                    extras.putParcelable(NOTE, list[adapterPosition])
                     listener.onLongItemClickListener(adapterPosition, extras)
                     true
                 }

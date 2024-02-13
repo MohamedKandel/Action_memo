@@ -18,9 +18,6 @@ interface DAO {
     @Query("select * from users")
     suspend fun getUsers(): List<User>
 
-    @Update
-    suspend fun updateUser(user: User)
-
     @Delete
     suspend fun deleteUser(user: User)
 
@@ -42,9 +39,9 @@ interface DAO {
         img: ByteArray, id: String
     )
 
-    @Query("update users set lang= :lang where id= :id")
-    suspend fun changeUserLang(lang: String, id: String)
+    @Query("select password from users where id= :id")
+    suspend fun getUserPassword(id: String): String
 
-    @Query("update users set uiMode= :uiMode where id= :id")
-    suspend fun changeUserMode(uiMode: Boolean, id: String)
+    @Query("update users set password = :password where id= :id")
+    suspend fun updateUserPassword(password: String, id: String?)
 }

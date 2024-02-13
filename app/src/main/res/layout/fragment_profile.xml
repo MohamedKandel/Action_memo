@@ -5,7 +5,7 @@
     style="@style/MAIN_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RegisterFragment">
+    tools:context=".ui.ProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,73 +17,30 @@
             android:layoutDirection="locale"
             android:textDirection="locale">
 
-            <RelativeLayout
-                android:id="@+id/header_layout"
-                style="@style/HeaderBG"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_20ssp">
-
-                <TextView
-                    android:id="@+id/welcome_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/titan_one_regular"
-                    android:padding="@dimen/_10ssp"
-                    android:text="@string/hello"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_32ssp" />
-            </RelativeLayout>
-
             <include
-                android:id="@+id/profile_layout"
+                android:id="@+id/picture_layout"
                 layout="@layout/profile_pic_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/header_layout"
-                android:layout_marginTop="@dimen/_20ssp" />
+                android:layout_margin="@dimen/_15ssp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_layout"
+                android:id="@+id/name_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/profile_layout"
-                android:layout_marginTop="@dimen/_7ssp"
+                android:layout_below="@+id/picture_layout"
+                android:layout_margin="@dimen/_7ssp"
                 android:hint="@string/username"
                 app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/person">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_username"
+                    android:id="@+id/txt_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawablePadding="@dimen/_7ssp"
-                    android:fontFamily="@font/inter_regular"
-                    android:inputType="text"
-                    android:textSize="@dimen/_13ssp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/user_layout"
-                android:layout_marginTop="@dimen/_7ssp"
-                android:hint="@string/password"
-                app:endIconMode="password_toggle"
-                app:startIconDrawable="@drawable/lock">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_pass"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawablePadding="@dimen/_7ssp"
-                    android:fontFamily="@font/inter_regular"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/_13ssp" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -91,21 +48,20 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/password_layout"
-                android:layout_marginTop="@dimen/_7ssp"
+                android:layout_below="@+id/name_layout"
+                android:layout_margin="@dimen/_7ssp"
                 android:hint="@string/birth_date"
                 app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/calendar">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_calendar"
+                    android:id="@+id/txt_birth"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawablePadding="@dimen/_7ssp"
-                    android:fontFamily="@font/inter_regular"
-                    android:inputType="date"
-                    android:textSize="@dimen/_13ssp" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/mail_layout"
@@ -113,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/birth_layout"
-                android:layout_marginTop="@dimen/_7ssp"
+                android:layout_margin="@dimen/_7ssp"
                 android:hint="@string/email"
                 app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/email">
@@ -123,15 +79,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawablePadding="@dimen/_7ssp"
-                    android:fontFamily="@font/inter_regular"
-                    android:inputType="textEmailAddress"
-                    android:textSize="@dimen/_13ssp" />
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/mail_layout"
@@ -142,24 +94,27 @@
                 android:fontFamily="@font/titan_one_regular"
                 android:paddingTop="@dimen/_10ssp"
                 android:paddingBottom="@dimen/_10ssp"
-                android:text="@string/register"
+                android:text="@string/save_edit"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_15ssp"
                 app:cornerRadius="@dimen/_7ssp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_return"
+                android:id="@+id/btn_cancel"
                 style="@style/WhiteBtnStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_register"
-                android:layout_margin="@dimen/_10ssp"
+                android:layout_marginStart="@dimen/_10ssp"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_below="@+id/btn_save"
+                android:layout_marginEnd="@dimen/_10ssp"
                 android:fontFamily="@font/titan_one_regular"
                 android:paddingTop="@dimen/_10ssp"
                 android:paddingBottom="@dimen/_10ssp"
-                android:text="@string/Return"
+                android:text="@string/cancel"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_15ssp" />
+
 
         </RelativeLayout>
 

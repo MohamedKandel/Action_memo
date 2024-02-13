@@ -1,50 +1,59 @@
 package com.mkandeel.actionmemo
 
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.TypefaceSpan
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import com.mkandeel.actionmemo.Helper.HelperClass
+import com.mkandeel.actionmemo.Room.NotesDB
 import com.mkandeel.actionmemo.databinding.ActivityMainBinding
+import com.mkandeel.actionmemo.ui.AboutFragment
 import com.mkandeel.actionmemo.ui.AddNoteFragment
 import com.mkandeel.actionmemo.ui.HomeFragment
+import com.mkandeel.actionmemo.ui.LoginFragment
+import com.mkandeel.actionmemo.ui.ProfileFragment
+import com.mkandeel.actionmemo.ui.RegisterFragment
+import com.mkandeel.actionmemo.ui.SettingFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var helper:HelperClass
+    private lateinit var helper: HelperClass
+    private lateinit var notesDB: NotesDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        helper = HelperClass(this)
+        helper.setTheme(helper.getTheme())
+        helper.setLocale(helper.getLangFromSP())
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        helper = HelperClass(this)
+        notesDB = NotesDB.getDBInstace(this)
         setSupportActionBar(binding.toolbar)
-        toggle = ActionBarDrawerToggle(this,binding.drawerLayout,R.string.open,R.string.close)
+        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
 
         binding.drawerLayout.addDrawerListener(toggle)
-        toggle.drawerArrowDrawable.color = resources.getColor(R.color.white,baseContext.theme)
+        if (helper.getTheme()) {
+            toggle.drawerArrowDrawable.color = resources.getColor(R.color.black, baseContext.theme)
+        } else {
+            toggle.drawerArrowDrawable.color = resources.getColor(R.color.white, baseContext.theme)
+        }
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.navView.setNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 // navigate to fragments
                 R.id.add -> helper.navigateToFragment(AddNoteFragment())
-                R.id.about -> Toast.makeText(baseContext,"About",Toast.LENGTH_SHORT).show()
+                R.id.about -> helper.navigateToFragment(AboutFragment())
                 R.id.home -> helper.navigateToFragment(HomeFragment())
-                R.id.profile -> Toast.makeText(baseContext,"Profile",Toast.LENGTH_SHORT).show()
-                R.id.setting -> Toast.makeText(baseContext,"Settings",Toast.LENGTH_SHORT).show()
-                R.id.logout -> Toast.makeText(baseContext,"Logout",Toast.LENGTH_SHORT).show()
+                R.id.profile -> helper.navigateToFragment(ProfileFragment())
+                R.id.setting -> helper.navigateToFragment(SettingFragment())
+                R.id.logout -> helper.navigateToFragment(LoginFragment())
             }
             binding.drawerLayout.close()
             true
@@ -53,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        helper.clearSP()
+        //helper.clearSP()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -28,4 +28,6 @@ object Constants {
     val CLICKED = "clicked"
     val DELETE = "delete"
     val EDIT = "edit"
+    val NOTE = "note"
+
 }

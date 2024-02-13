@@ -1,5 +1,6 @@
 package com.mkandeel.actionmemo.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,7 @@ import com.mkandeel.actionmemo.Helper.Constants.CLICKED
 import com.mkandeel.actionmemo.Helper.Constants.DELETE
 import com.mkandeel.actionmemo.Helper.Constants.EDIT
 import com.mkandeel.actionmemo.Helper.Constants.ID
+import com.mkandeel.actionmemo.Helper.Constants.NOTE
 import com.mkandeel.actionmemo.Helper.HelperClass
 import com.mkandeel.actionmemo.R
 import com.mkandeel.actionmemo.Room.NotesDB
@@ -48,7 +51,7 @@ class HomeFragment : Fragment(), ClickListener {
     private lateinit var helper: HelperClass
     private lateinit var noteDB: NotesDB
     private lateinit var adapter: NoteAdapter
-    private lateinit var noteList: List<Note>
+    private lateinit var noteList: MutableList<Note>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,13 +80,11 @@ class HomeFragment : Fragment(), ClickListener {
         lifecycleScope.launch {
             if (id != null) {
                 val userData = noteDB.userDAO().getUserById(id)
-                helper.setLocale(userData.lang)
-
                 helper.display(userData.img, img)
                 txt.text = resources.getString(R.string.hello)
                 txt.append(", " + userData.username.split(" ")[0])
 
-                noteList = noteDB.noteDAO().getNotes(id)
+                noteList = noteDB.noteDAO().getNotes(id).toMutableList()
                 adapter.updateAdapter(noteList)
             }
         }
@@ -104,6 +105,32 @@ class HomeFragment : Fragment(), ClickListener {
     }
 
     override fun onItemClickListener(position: Int, extras: Bundle?) {
+        var noteObj:Note ?= null
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            noteObj = extras?.getParcelable(NOTE,Note::class.java)
+        } else {
+            noteObj = extras?.getParcelable(NOTE)
+        }
+        val dialog = helper.showDialog(requireContext(),R.layout.opened_note,Gravity.CENTER)
+        val title = dialog.findViewById<TextView>(R.id.txt_title)
+        val body = dialog.findViewById<TextView>(R.id.txt_note)
+        val layout = dialog.findViewById<RelativeLayout>(R.id.layout)
+        title.text = noteObj?.title
+        body.text = noteObj?.body
+        when(noteObj?.priority) {
+            0->{
+                layout.setBackgroundColor(resources.getColor(R.color.priority_0,context?.theme))
+            }
+            1->{
+                layout.setBackgroundColor(resources.getColor(R.color.priority_1,context?.theme))
+            }
+            2->{
+                layout.setBackgroundColor(resources.getColor(R.color.priority_2,context?.theme))
+            }
+            3->{
+                layout.setBackgroundColor(resources.getColor(R.color.priority_3,context?.theme))
+            }
+        }
 
     }
 
@@ -126,7 +153,8 @@ class HomeFragment : Fragment(), ClickListener {
                 btn_ok.setOnClickListener {
                     lifecycleScope.launch {
                         noteDB.noteDAO().deleteNote(noteList[position])
-                        noteList.drop(position)
+                        noteList.removeAt(position)
+                        println(noteList[0].title)
                         adapter.updateAdapter(noteList)
                         dialog.dismiss()
                         dialog.cancel()
@@ -138,9 +166,8 @@ class HomeFragment : Fragment(), ClickListener {
                     dialog.cancel()
                 }
             }
-
             EDIT -> {
-
+                helper.navigateToFragment(AddNoteFragment(),extras)
             }
         }
     }

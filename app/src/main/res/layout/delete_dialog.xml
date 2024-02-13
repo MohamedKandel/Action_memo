@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10ssp">
+
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/save_edit"
+        android:src="@drawable/delete_dialog"
+        app:tint="@color/red" />
+
+    <TextView
+        android:id="@+id/txt_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_icon"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/save_edit"
+        android:textColor="@color/red"
+        android:textSize="@dimen/_18ssp" />
+
+    <TextView
+        android:id="@+id/txt_dialog_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_dialog_title"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/save_edit"
+        style="@style/BlackTextView"
+        android:textSize="@dimen/_14ssp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_dialog_msg"
+        android:layout_marginStart="@dimen/_10ssp"
+        android:layout_marginTop="@dimen/_10ssp"
+        android:layout_marginEnd="@dimen/_10ssp"
+        android:layout_marginBottom="@dimen/_10ssp"
+        android:fontFamily="@font/titan_one_regular"
+        android:paddingTop="@dimen/_10ssp"
+        android:paddingBottom="@dimen/_10ssp"
+        android:text="@string/delete_note"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_15ssp"
+        app:cornerRadius="@dimen/_7ssp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cancel"
+        style="@style/WhiteBtnStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_delete"
+        android:layout_marginStart="@dimen/_10ssp"
+        android:layout_marginTop="@dimen/_10ssp"
+        android:layout_marginEnd="@dimen/_10ssp"
+        android:layout_marginBottom="@dimen/_10ssp"
+        android:fontFamily="@font/titan_one_regular"
+        android:paddingTop="@dimen/_10ssp"
+        android:paddingBottom="@dimen/_10ssp"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_15ssp" />
+
+
+
+</RelativeLayout>

@@ -11,9 +11,7 @@ class User(
     var password:String,
     var email: String,
     var birthDate: String,
-    var img:ByteArray,
-    var lang: String,
-    var uiMode: Boolean
+    var img:ByteArray
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -27,8 +25,6 @@ class User(
         if (email != other.email) return false
         if (birthDate != other.birthDate) return false
         if (!img.contentEquals(other.img)) return false
-        if (lang != other.lang) return false
-        if (uiMode != other.uiMode) return false
 
         return true
     }
@@ -40,8 +36,6 @@ class User(
         result = 31 * result + email.hashCode()
         result = 31 * result + birthDate.hashCode()
         result = 31 * result + img.contentHashCode()
-        result = 31 * result + lang.hashCode()
-        result = 31 * result + uiMode.hashCode()
         return result
     }
 }

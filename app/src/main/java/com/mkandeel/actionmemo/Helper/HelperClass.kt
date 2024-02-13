@@ -1,8 +1,10 @@
 package com.mkandeel.actionmemo.Helper
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.content.res.Configuration
@@ -26,6 +28,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.mkandeel.actionmemo.Helper.Constants.ID
+import com.mkandeel.actionmemo.Helper.Constants.LANG
+import com.mkandeel.actionmemo.Helper.Constants.MODE
 import com.mkandeel.actionmemo.R
 import java.io.ByteArrayOutputStream
 import java.io.FileInputStream
@@ -64,14 +68,14 @@ class HelperClass {
 
     fun setUserID(userID: String) {
         initSP()
-        editor.putString(ID,userID)
+        editor.putString(ID, userID)
         editor.commit()
         editor.apply()
     }
 
-    fun getUserID() : String? {
+    fun getUserID(): String? {
         initSP()
-        return sp.getString(ID,"0")
+        return sp.getString(ID, "0")
     }
 
     fun clearSP() {
@@ -97,7 +101,7 @@ class HelperClass {
         view.visibility = View.GONE
         val navView: View = activity.findViewById(R.id.navView)
         navView.visibility = View.GONE
-        val drawer:DrawerLayout = activity.findViewById(R.id.drawerLayout)
+        val drawer: DrawerLayout = activity.findViewById(R.id.drawerLayout)
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
@@ -108,7 +112,7 @@ class HelperClass {
         view.visibility = View.VISIBLE
         val navView: View = activity.findViewById(R.id.navView)
         navView.visibility = View.VISIBLE
-        val drawer:DrawerLayout = activity.findViewById(R.id.drawerLayout)
+        val drawer: DrawerLayout = activity.findViewById(R.id.drawerLayout)
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
@@ -216,6 +220,7 @@ class HelperClass {
         val configuration: Configuration = resources.configuration
         configuration.setLocale(locale)
         configuration.setLayoutDirection(locale)
+        resources.updateConfiguration(configuration,resources.displayMetrics)
         context.createConfigurationContext(configuration)
     }
 
@@ -243,5 +248,33 @@ class HelperClass {
         } else {
             Toast.makeText(context, resID, Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun setLangToSP(lang:String?) {
+        initSP()
+        editor.putString(LANG,lang)
+        editor.commit()
+        editor.apply()
+    }
+
+    fun getLangFromSP():String {
+        initSP()
+        if (sp.getString(LANG,"en")?.equals("en") == true) {
+            return "en"
+        } else {
+            return "ar"
+        }
+    }
+
+    fun setThemeToSP(mode:Boolean) {
+        initSP()
+        editor.putBoolean(MODE,mode)
+        editor.commit()
+        editor.apply()
+    }
+
+    fun getTheme() :Boolean {
+        initSP()
+        return sp.getBoolean(MODE,false)
     }
 }

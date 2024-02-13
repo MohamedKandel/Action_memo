@@ -1,10 +1,12 @@
 package com.mkandeel.actionmemo.Room.notes
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.mkandeel.actionmemo.Room.users.User
+import kotlinx.android.parcel.Parcelize
 
 @Entity(
     tableName = "notes",
@@ -15,13 +17,14 @@ import com.mkandeel.actionmemo.Room.users.User
         onDelete = ForeignKey.CASCADE // Define what happens on user deletion
     )]
 )
+@Parcelize
 class Note(
     @ColumnInfo(name = "userId", index = true)
     var userId: String,
     var title: String,
     var body: String,
     var priority: Int
-) {
+) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
     override fun equals(other: Any?): Boolean {

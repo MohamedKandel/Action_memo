@@ -17,15 +17,14 @@
             android:layoutDirection="locale"
             android:textDirection="locale">
 
-            <include layout="@layout/transparent_toolbar"
-                android:id="@+id/toolbar"/>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/title_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/toolbar"
+
                 android:layout_margin="@dimen/_7ssp"
                 android:hint="@string/title"
                 app:endIconMode="clear_text">

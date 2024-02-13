@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">مذكرات</string>
-    <string name="add_new">اضافة مذكرة</string>
+    <string name="add_new">اضافة ملاحظة</string>
     <string name="home">الرئيسة</string>
     <string name="profile">الصفحة الشخصية</string>
     <string name="settings">الاعدادات</string>
@@ -20,9 +20,6 @@
     <string name="Return">عودة</string>
     <string name="permission_required">هذا السماح مطلوب لتتمكن من رفع صورة شخصية لك</string>
     <string name="email">البريد الالكتروني</string>
-    <string name="mode">الوضع الليلي</string>
-    <string name="english">الإنجليزية</string>
-    <string name="arabic">العربية</string>
     <string name="complete_required">من فضلك أكمل جميع الحقول المطلوبة</string>
     <string name="incorrect">اسم المستخدم او كلمة المرور خاطئة</string>
     <string name="confirm">تأكيد</string>
@@ -40,6 +37,41 @@
     <string name="priority_1">طبيعي</string>
     <string name="priority_2">مهم ولكن غير ضروري</string>
     <string name="priority_3">مهم وضروري</string>
-    <string name="save">حفظ المذكرة</string>
-    <string name="delete_msg">هل انت متأكد من انك تريد حذف هذه المذكرة ؟</string>
+    <string name="save">حفظ الملاحظة</string>
+    <string name="delete_msg">هل انت متأكد من انك تريد حذف هذه الملاحظة ؟</string>
+    <string name="current_password">كلمة المرور الحالية</string>
+    <string name="new_password">كلمة المرور الجديدة</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="Change">تغيير</string>
+    <string name="incorrect_password">كلمة المرور التي ادخلتها الجديدة لا تتشابه مع التأكيد</string>
+    <string name="successfully_change">كلمة المرور تغيرت بنجاح</string>
+    <string name="app_lang">لغة التطبيق</string>
+    <string name="mode_change">تغيير الوضع</string>
+    <string name="apps">تطبيقاتنا</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="share">مشاركة التطبيق</string>
+    <string name="change_password">تغيير كلمة المرور</string>
+    <string name="delete_notes">حذف جميع الملاحظات</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="share_msg">يمكنك مسح الكود للوصول للتطبيق على متجر جوجل\nأو\n
+        يمكنك ارسال رابط التطبيق في رسالة عن طريق الضغط على الزر ادناه</string>
+    <string name="share_with">مشاركة بواسطة …</string>
+    <string name="save_edit">حفظ</string>
+    <string name="update_msg">تم تحديث البيانات بنجاح</string>
+
+    <string name="current_version">النسخة الحالية من التطبيق </string>
+    <string name="delete_all_notes_title">حذف جميع الملاحظات</string>
+    <string name="delete_all_notes_msg"><u>تحذير: </u>في حالة حذف جميع الملاحظات الخاصة بك لم تتمكن من اعادتها مرة اخرى</string>
+    <string name="delete_account_title">حذف الملاحظات</string>
+    <string name="delete_account_msg"><u>تحذير: </u>في حالة حذف الحساب سيتم حذف الحساب والملاحظات المرتبطة به</string>
+
+    <array name="languages">
+        <item>الإنجليزية</item>
+        <item>العربية</item>
+    </array>
+
+    <array name="mode">
+        <item>مضيئ</item>
+        <item>ليلي</item>
+    </array>
 </resources>

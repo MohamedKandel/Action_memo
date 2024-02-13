@@ -4,6 +4,9 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -18,20 +21,21 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.mkandeel.actionmemo.Helper.HelperClass
 import com.mkandeel.actionmemo.Helper.RealPathUtil
+import com.mkandeel.actionmemo.MainActivity
 import com.mkandeel.actionmemo.R
 import com.mkandeel.actionmemo.Room.NotesDB
 import com.mkandeel.actionmemo.Room.users.User
 import com.mkandeel.actionmemo.databinding.FragmentRegisterBinding
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 import java.util.Calendar
 
 
-class RegisterFragment : Fragment(), CompoundButton.OnCheckedChangeListener {
+class RegisterFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +46,8 @@ class RegisterFragment : Fragment(), CompoundButton.OnCheckedChangeListener {
     private lateinit var util: RealPathUtil
     private lateinit var img_array: ByteArray
     private lateinit var notesDB: NotesDB
+
+    private fun isImageArrayInitialized() = ::img_array.isInitialized
 
 
     private val arl: ActivityResultLauncher<String> = registerForActivityResult(
@@ -66,19 +72,19 @@ class RegisterFragment : Fragment(), CompoundButton.OnCheckedChangeListener {
         }
     )
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
+
         helper = HelperClass(this)
         util = RealPathUtil()
         notesDB = NotesDB.getDBInstace(requireContext())
 
         helper.hideActionBar()
-
-        binding.modeSwitch.setButtonDrawable(R.drawable.night)
 
         onBackPressed()
 
@@ -116,45 +122,38 @@ class RegisterFragment : Fragment(), CompoundButton.OnCheckedChangeListener {
             displayDatePicker()
         }
 
-        binding.modeSwitch.setOnCheckedChangeListener(this)
 
         binding.btnRegister.setOnClickListener {
             lifecycleScope.launch {
                 val list = notesDB.userDAO().getAllIDs()
-                val ID = helper.generateID(list,8)
+                val ID = helper.generateID(list, 8)
                 val username = binding.txtUsername.text.toString()
                 val password = binding.txtPass.text.toString()
                 val birthDate = binding.txtCalendar.text.toString()
                 val mail = binding.txtMail.text.toString()
-                val lang = getLang()
-                val mode = getMode()
-                if (lang.isNotEmpty()) {
-                    val user = User(ID,username,password,mail,birthDate,img_array,lang,mode)
+
+                if (username.isNotEmpty() && password.isNotEmpty()
+                    && birthDate.isNotEmpty() && mail.isNotEmpty()
+                ) {
+
+                    if (!isImageArrayInitialized()) {
+                        val drawable =
+                            resources.getDrawable(R.drawable.default_avatar, context?.theme)
+                        val bitmap = (drawable as BitmapDrawable).bitmap
+                        val stream = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                        img_array = stream.toByteArray()
+                    }
+                    val user = User(ID, username, password, mail, birthDate, img_array)
                     notesDB.userDAO().registerUser(user)
                     helper.navigateToFragment(LoginFragment())
                 } else {
-                    helper.showToast(resources.getString(R.string.complete_required),0)
+                    helper.showToast(resources.getString(R.string.complete_required), 0)
                 }
             }
         }
 
         return binding.root
-    }
-
-    private fun getMode():Boolean {
-        val uiMode = binding.modeSwitch.isChecked
-        return uiMode
-    }
-
-    private fun getLang(): String {
-        val lang = if (binding.radEn.isChecked) {
-            "en"
-        } else if (binding.radAr.isChecked) {
-            "ar"
-        } else {
-            ""
-        }
-        return lang
     }
 
     @SuppressLint("SetTextI18n")
@@ -182,15 +181,5 @@ class RegisterFragment : Fragment(), CompoundButton.OnCheckedChangeListener {
                     fragmentManager.popBackStack()
                 }
             })
-    }
-
-    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        if (isChecked) {
-            binding.modeSwitch.setButtonDrawable(R.drawable.light_mode)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            binding.modeSwitch.setButtonDrawable(R.drawable.night)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
     }
 }
