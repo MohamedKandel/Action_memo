@@ -6,6 +6,7 @@
     <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="logout">Logout</string>
+    <string name="logout_msg">Are you sure you want to logout</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="hello">Hello</string>
@@ -20,9 +21,11 @@
     <string name="Return">Return</string>
     <string name="incorrect">incorrect username or password</string>
     <string name="permission_required">This permission is required to be able to upload profile picture</string>
+    <string name="permission_required_2">This permission is required to be able to upload screenshot</string>
     <string name="complete_required">Please complete all required field</string>
     <string name="confirm">Confirmation</string>
     <string name="enter_password">please Enter password of this user to remove this user</string>
+    <string name="enter_password_notes">please Enter password of this user to remove this user\'s notes</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="mis_match">incorrect password</string>
@@ -63,6 +66,19 @@
     <string name="delete_all_notes_msg"><u>CAUTION:</u> if you delete all your notes you can\'t undo this action</string>
     <string name="delete_account_title">Delete account</string>
     <string name="delete_account_msg"><u>CAUTION:</u> if you delete your account, account and your notes will permanently delete and you can\'t undo them</string>
+    <string name="notes_deleted">Notes deleted successfully</string>
+    <string name="user_deleted">User deleted successfully</string>
+    <string name="about_us">This app is developed and designed by devement team.\nuser can write his notes privately and no one will see any of his notes even if there is multiple users uses application on the same device each one will have his private notes and these notes don\'t share with anyone else.\nif you have any suggestion or issue with our app, please don\'t hesitate to contact with us.\nwe always pleasure with your serving and hope to improve your experience with our apps.\nif you like this app please rate us on google play.</string>
+    <string name="contact">please don\'t hesitate to contact us if you have any suggestions or technical issue</string>
+    <string name="request_pic">if you contacting us for technical issue, this photo will help us to solve your problem\nplease take a screenshot for your problem and attach it with this message</string>
+    <string name="browse">Browse</string>
+    <string name="title_hint">ex: problem with adding new note, improvement suggestion</string>
+
+
+    <string name="eg">Eman Guide</string>
+    <string name="pm">Password manager</string>
+    <string name="qr">QR Reader</string>
+    <string name="send">Send</string>
 
     <array name="languages">
         <item>English</item>

@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mkandeel.actionmemo.Adapter.SavedUserAdapter
 import com.mkandeel.actionmemo.Helper.ClickListener
 import com.mkandeel.actionmemo.Helper.Constants.ID
@@ -36,9 +38,13 @@ class LoginFragment : Fragment(), ClickListener {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var helper: HelperClass
     private lateinit var notesDB: NotesDB
-    private lateinit var users: List<User>
+    private lateinit var users: MutableList<User>
     private lateinit var adapter: SavedUserAdapter
     private lateinit var dialog: Dialog
+
+    private fun isDialogInitialized():Boolean {
+        return this::dialog.isInitialized
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -58,23 +64,31 @@ class LoginFragment : Fragment(), ClickListener {
 
         adapter = SavedUserAdapter(requireContext(), users, this)
 
+        // display dialog with users
+        lifecycleScope.launch {
+            users = notesDB.userDAO().getUsers().toMutableList()
+            if (users.isNotEmpty()) {
+                context?.let { it1 ->
+                    dialog = BottomSheetDialog(requireContext())
+                    val view = layoutInflater.inflate(R.layout.dialog_users,null,false)
+                    //dialog = helper.showDialog(it1, R.layout.dialog_users, Gravity.BOTTOM,true)
+                    val rv = view.findViewById<RecyclerView>(R.id.users_recyclerView)
+                    rv.adapter = adapter
+                    adapter.update(users)
+                    dialog.setContentView(view)
+                    dialog.show()
+
+                    println(notesDB.userDAO().getAllIDs())
+                }
+            } else {
+                Log.d("Saved Users", "empty")
+            }
+        }
 
         binding.txtUsername.setOnClickListener {
-            // display dialog with users
-            lifecycleScope.launch {
-                users = notesDB.userDAO().getUsers()
-                if (users.isNotEmpty()) {
-                    context?.let { it1 ->
-                        dialog = helper.showDialog(it1, R.layout.dialog_users, Gravity.BOTTOM)
-                        val rv = dialog.findViewById<RecyclerView>(R.id.users_recyclerView)
-                        rv.adapter = adapter
-                        adapter.update(users)
-
-                        println(notesDB.userDAO().getAllIDs())
-                    }
-                } else {
-                    Log.d("Saved Users", "empty")
-                }
+            if (isDialogInitialized()) {
+                dialog.dismiss()
+                dialog.cancel()
             }
         }
 
@@ -85,10 +99,10 @@ class LoginFragment : Fragment(), ClickListener {
                 val id = notesDB.userDAO().login(username, password)
                 if (id != null) {
                     // user found
-                    helper.showToast(resources.getString(R.string.logged_in), 0)
                     val extras = Bundle()
                     extras.putString(ID, id)
                     helper.setUserID(id)
+                    println(helper.getUserID())
                     helper.navigateToFragment(HomeFragment(), extras)
                 } else {
                     helper.showToast(resources.getString(R.string.incorrect), 0)
@@ -129,13 +143,17 @@ class LoginFragment : Fragment(), ClickListener {
         val password = extras?.getString(PASSWORD)
         val id = extras?.getString(ID)
         // call navigate to home method
-        binding.txtUsername.setText(username)
-        binding.txtPass.setText(password)
-        if (id != null) {
-            helper.setUserID(id)
+        binding.apply {
+            txtUsername.setText(username)
+            txtPass.requestFocus()
         }
 
-        helper.navigateToFragment(HomeFragment(), extras)
+        /*binding.txtPass.setText(password)
+        if (id != null) {
+            helper.setUserID(id)
+        }*/
+
+        //helper.navigateToFragment(HomeFragment(), extras)
 
     }
 
@@ -144,7 +162,7 @@ class LoginFragment : Fragment(), ClickListener {
         val password = extras?.getString(PASSWORD)
         val userID = extras?.getString(ID)
         val confirmDialg =
-            helper.showDialog(requireContext(), R.layout.confirmation_dialog, Gravity.CENTER)
+            helper.showDialog(requireContext(), R.layout.confirmation_dialog, Gravity.CENTER,false)
         val btn_ok = confirmDialg.findViewById<Button>(R.id.btn_ok)
         val btn_cancel = confirmDialg.findViewById<Button>(R.id.btn_cancel)
         val txt = confirmDialg.findViewById<EditText>(R.id.txt_pass)
@@ -154,12 +172,15 @@ class LoginFragment : Fragment(), ClickListener {
                 lifecycleScope.launch {
                     if (userID != null) {
                         notesDB.userDAO().deleteById(userID)
-                        users.drop(position)
+                        users.removeAt(position)
                         adapter.update(users)
                         confirmDialg.dismiss()
                         confirmDialg.cancel()
                     }
                 }
+            } else {
+                helper.showToast(resources.getString(R.string.mis_match),0)
+                txt.text?.clear()
             }
         }
 

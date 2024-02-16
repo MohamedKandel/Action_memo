@@ -6,6 +6,7 @@
     <string name="profile">الصفحة الشخصية</string>
     <string name="settings">الاعدادات</string>
     <string name="about">حول التطبيق</string>
+    <string name="logout_msg">هل أنت متأكد انك تريد تسجيل الخروج</string>
     <string name="logout">تسجيل خروج</string>
     <string name="open">فتح</string>
     <string name="close">غلق</string>
@@ -19,6 +20,7 @@
     <string name="birth_date">تاريخ الميلاد</string>
     <string name="Return">عودة</string>
     <string name="permission_required">هذا السماح مطلوب لتتمكن من رفع صورة شخصية لك</string>
+    <string name="permission_required_2">هذا السماح مطلوب لتتمكن من رفع صورة للمشكلة</string>
     <string name="email">البريد الالكتروني</string>
     <string name="complete_required">من فضلك أكمل جميع الحقول المطلوبة</string>
     <string name="incorrect">اسم المستخدم او كلمة المرور خاطئة</string>
@@ -64,6 +66,20 @@
     <string name="delete_all_notes_msg"><u>تحذير: </u>في حالة حذف جميع الملاحظات الخاصة بك لم تتمكن من اعادتها مرة اخرى</string>
     <string name="delete_account_title">حذف الملاحظات</string>
     <string name="delete_account_msg"><u>تحذير: </u>في حالة حذف الحساب سيتم حذف الحساب والملاحظات المرتبطة به</string>
+    <string name="enter_password_notes">من فضلك ادخل كلمة المرور الخاصة بهذا المستخدم لحذف مذاكرات المستخدم</string>
+    <string name="notes_deleted">تم حذف الملاحظات بنجاح</string>
+    <string name="user_deleted">تم حذف المستخدم بنجاح</string>
+    <string name="about_us">تم تصميم وتطوير هذا التطبيق من قبل فريق devment.\nيمكن للمستخدم كتابة ملاحظاته بخصوصية ولن تظهر هذه الملاحظات لأي مستخدم اخر حتى وان كان هناك اكثر من مستخدم على هاتف واحد فكل مستخدم لديه ملاحظاته الخاصة به.\nإذا كان لديك اي مقترح او مشكلة مع تطبيقنا من فضلك لا تتردد في التواصل معنا.\nنحن دائما سعداء بخدمتك ونتمنى تحسين تجربتك مع تطبيقاتنا.\nإذا أعجبك تطبيقنا من فضلك قيّم التطبيق على المتجر.</string>
+    <string name="contact">من فضلك لا تتردد إذا كان لديك أي مقترحات او مشاكل فنية في التطبيق</string>
+    <string name="request_pic">إذا كان تواصلك معنا الان بسبب مشكلة في التطبيق هذه الصورة سوف تساعد الفريق المختص بحل مشكلتك بشكل اسرع\nمن فضلك ارفق صورة لمشكلتك مع هذا الرسالة</string>
+    <string name="browse">إرفق</string>
+
+    <string name="eg">دليل الايمان</string>
+    <string name="pm">مدير كلمات المرور</string>
+    <string name="qr">قارئ QR</string>
+    <string name="send">إرسل</string>
+    <string name="title_hint">مثال: مشكلة في اضافة مذكرة جديدة، اقتراح لتتحسين</string>
+
 
     <array name="languages">
         <item>الإنجليزية</item>

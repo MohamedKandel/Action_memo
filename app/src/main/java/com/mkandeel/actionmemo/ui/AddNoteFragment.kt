@@ -38,6 +38,8 @@ class AddNoteFragment : Fragment() {
 
         var priority: Int = -1
 
+        onBackPressed()
+
         binding.layoutPriority0.setOnClickListener {
             priority = 0
             setPriority(priority)
@@ -181,11 +183,5 @@ class AddNoteFragment : Fragment() {
                     helper.navigateToFragment(HomeFragment())
                 }
             })
-    }
-
-    private fun pickPriority(): Int {
-        var priority: Int = -1
-
-        return priority
     }
 }

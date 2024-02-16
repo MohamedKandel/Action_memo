@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_height="@dimen/_180sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10ssp"
+    android:elevation="@dimen/_3ssp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="@dimen/_10ssp"
+    android:layout_margin="@dimen/_10ssp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:layout_gravity="center|top">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/app_icon"
+            android:src="@drawable/logout"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/logout"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_app_name"
+            android:text="@string/logout"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/app_icon"
+            android:layout_marginTop="@dimen/_8ssp"
+            android:textSize="@dimen/_15ssp"
+            android:fontFamily="@font/titan_one_regular"
+            style="@style/BlackTextView"/>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

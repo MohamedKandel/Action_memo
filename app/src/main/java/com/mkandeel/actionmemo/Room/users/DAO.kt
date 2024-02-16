@@ -44,4 +44,7 @@ interface DAO {
 
     @Query("update users set password = :password where id= :id")
     suspend fun updateUserPassword(password: String, id: String?)
+
+    @Query("select email from users where id= :id")
+    suspend fun getUserMail(id: String):String
 }

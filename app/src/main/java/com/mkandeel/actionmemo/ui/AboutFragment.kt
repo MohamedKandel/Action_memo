@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import com.mkandeel.actionmemo.Helper.HelperClass
 import com.mkandeel.actionmemo.R
 import com.mkandeel.actionmemo.databinding.FragmentAboutBinding
@@ -36,7 +38,20 @@ class AboutFragment : Fragment() {
             txtVersion.append(" $versionName")
         }
 
+        onBackPressed()
+
         return binding.root
     }
 
+    private fun onBackPressed() {
+        (activity as AppCompatActivity).supportFragmentManager
+        requireActivity().onBackPressedDispatcher.addCallback(
+            requireActivity() /* lifecycle owner */,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Back is pressed... Finishing the activity
+                    helper.navigateToFragment(HomeFragment())
+                }
+            })
+    }
 }

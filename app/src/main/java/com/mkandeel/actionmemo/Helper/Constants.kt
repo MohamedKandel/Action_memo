@@ -30,4 +30,6 @@ object Constants {
     val EDIT = "edit"
     val NOTE = "note"
 
+    val GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id="
+
 }

@@ -15,7 +15,7 @@
     <style name="ToolbarStyle" parent="Theme.MaterialComponents.DayNight" >
         <item name="android:fontFamily">@font/titan_one_regular</item>
         <item name="android:background">@color/my_dark_primary</item>
-        <item name="android:textColorPrimary">@color/dark_black</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 
     <style name="BlackTextView">
@@ -68,6 +68,11 @@
 
     <style name="img_style">
         <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_out</item>
     </style>
 
 </resources>

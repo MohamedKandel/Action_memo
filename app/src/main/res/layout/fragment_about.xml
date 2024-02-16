@@ -30,10 +30,10 @@
                 android:id="@+id/txt_about_us"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_version"
                 android:layout_marginTop="@dimen/_5ssp"
                 android:fontFamily="@font/inter_regular"
-                android:text="@string/current_version"
+                android:layout_below="@+id/txt_version"
+                android:text="@string/about_us"
                 android:textSize="@dimen/_13ssp" />
 
         </RelativeLayout>

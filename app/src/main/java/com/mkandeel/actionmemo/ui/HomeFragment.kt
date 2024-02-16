@@ -1,18 +1,23 @@
 package com.mkandeel.actionmemo.ui
 
+import android.content.Context
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputLayout
@@ -29,18 +34,8 @@ import com.mkandeel.actionmemo.Room.NotesDB
 import com.mkandeel.actionmemo.Room.notes.Note
 import com.mkandeel.actionmemo.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
-import java.util.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment(), ClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +56,36 @@ class HomeFragment : Fragment(), ClickListener {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         helper = HelperClass(this)
         noteDB = NotesDB.getDBInstace(requireContext())
+
+        // check if keyboard opened or not
+/*        var isKeyboardShowing = false;
+        container?.viewTreeObserver?.addOnGlobalLayoutListener(
+            ViewTreeObserver.OnGlobalLayoutListener {
+                val r = Rect()
+                container.getWindowVisibleDisplayFrame(r)
+                val screenHeight: Int = container.rootView.height
+
+                val keypadHeight = screenHeight - r.bottom
+
+                if (keypadHeight > screenHeight * 0.15) { // 0.15 ratio is perhaps enough to determine keypad height.
+                    // keyboard is opened
+                    if (!isKeyboardShowing) {
+                        isKeyboardShowing = false
+
+                    }
+                } else {
+                    // keyboard is closed
+                    if (isKeyboardShowing) {
+                        isKeyboardShowing = true
+                    }
+                }
+            }
+        )*/
+        if (view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) != null) {
+            val imm =
+                view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view?.windowToken, 0)
+        }
 
         helper.showActionBar()
         noteList = ArrayList<Note>()
@@ -105,30 +130,34 @@ class HomeFragment : Fragment(), ClickListener {
     }
 
     override fun onItemClickListener(position: Int, extras: Bundle?) {
-        var noteObj:Note ?= null
+        var noteObj: Note? = null
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            noteObj = extras?.getParcelable(NOTE,Note::class.java)
+            noteObj = extras?.getParcelable(NOTE, Note::class.java)
         } else {
             noteObj = extras?.getParcelable(NOTE)
         }
-        val dialog = helper.showDialog(requireContext(),R.layout.opened_note,Gravity.CENTER)
+        val dialog =
+            helper.showDialog(requireContext(), R.layout.opened_note, Gravity.CENTER, false)
         val title = dialog.findViewById<TextView>(R.id.txt_title)
         val body = dialog.findViewById<TextView>(R.id.txt_note)
         val layout = dialog.findViewById<RelativeLayout>(R.id.layout)
         title.text = noteObj?.title
         body.text = noteObj?.body
-        when(noteObj?.priority) {
-            0->{
-                layout.setBackgroundColor(resources.getColor(R.color.priority_0,context?.theme))
+        when (noteObj?.priority) {
+            0 -> {
+                layout.setBackgroundColor(resources.getColor(R.color.priority_0, context?.theme))
             }
-            1->{
-                layout.setBackgroundColor(resources.getColor(R.color.priority_1,context?.theme))
+
+            1 -> {
+                layout.setBackgroundColor(resources.getColor(R.color.priority_1, context?.theme))
             }
-            2->{
-                layout.setBackgroundColor(resources.getColor(R.color.priority_2,context?.theme))
+
+            2 -> {
+                layout.setBackgroundColor(resources.getColor(R.color.priority_2, context?.theme))
             }
-            3->{
-                layout.setBackgroundColor(resources.getColor(R.color.priority_3,context?.theme))
+
+            3 -> {
+                layout.setBackgroundColor(resources.getColor(R.color.priority_3, context?.theme))
             }
         }
 
@@ -141,7 +170,8 @@ class HomeFragment : Fragment(), ClickListener {
                 val dialog = helper.showDialog(
                     requireContext(),
                     R.layout.confirmation_dialog,
-                    Gravity.CENTER
+                    Gravity.CENTER,
+                    false
                 )
                 val layout = dialog.findViewById<TextInputLayout>(R.id.layout_pass)
                 layout.visibility = View.GONE
@@ -166,8 +196,9 @@ class HomeFragment : Fragment(), ClickListener {
                     dialog.cancel()
                 }
             }
+
             EDIT -> {
-                helper.navigateToFragment(AddNoteFragment(),extras)
+                helper.navigateToFragment(AddNoteFragment(), extras)
             }
         }
     }

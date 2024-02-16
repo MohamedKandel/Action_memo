@@ -6,12 +6,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -26,6 +28,7 @@ import com.mkandeel.actionmemo.Room.NotesDB
 import com.mkandeel.actionmemo.data.SettingModel
 import com.mkandeel.actionmemo.databinding.FragmentSettingBinding
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
 class SettingFragment : Fragment(), ClickListener {
 
@@ -242,11 +245,11 @@ class SettingFragment : Fragment(), ClickListener {
             }
 
             2 -> {
-
+                helper.navigateToFragment(OurAppsFragment())
             }
 
             3 -> {
-
+                helper.navigateToFragment(ContactFragment())
             }
 
             4 -> {
@@ -258,19 +261,74 @@ class SettingFragment : Fragment(), ClickListener {
             }
 
             6 -> {
-                val dialog = helper.showDialog(requireContext(),R.layout.delete_dialog,Gravity.CENTER)
-                //val img = dialog.findViewById<ImageView>(R.id.img_icon)
+                val dialog = helper.showDialog(
+                    requireContext(),
+                    R.layout.delete_dialog,
+                    Gravity.CENTER,
+                    false
+                )
+                val img = dialog.findViewById<ImageView>(R.id.img_icon)
                 val txt_title = dialog.findViewById<TextView>(R.id.txt_dialog_title)
                 val txt_msg = dialog.findViewById<TextView>(R.id.txt_dialog_msg)
                 val btn_del = dialog.findViewById<Button>(R.id.btn_delete)
                 val btn_cancel = dialog.findViewById<Button>(R.id.btn_cancel)
+
+                img.setColorFilter(resources.getColor(R.color.red, context?.theme))
 
                 txt_title.setText(resources.getString(R.string.delete_all_notes_title))
                 txt_msg.setText(resources.getString(R.string.delete_all_notes_msg))
 
                 btn_del.setOnClickListener {
                     lifecycleScope.launch {
-                        helper.getUserID()?.let { it1 -> notesDB.noteDAO().deleteAllNotes(it1) }
+                        helper.getUserID()?.let { it1 ->
+                            val password = notesDB.userDAO().getUserPassword(it1)
+                            val dialog_confirm = helper.showDialog(
+                                requireContext(),
+                                R.layout.confirmation_dialog,
+                                Gravity.CENTER,
+                                false
+                            )
+                            val txt = dialog_confirm.findViewById<TextView>(R.id.txt_message)
+                            txt.setText(resources.getString(R.string.enter_password_notes))
+                            val editText = dialog_confirm.findViewById<EditText>(R.id.txt_pass)
+                            val btn_ok = dialog_confirm.findViewById<Button>(R.id.btn_ok)
+                            val btn_cancel = dialog_confirm.findViewById<Button>(R.id.btn_cancel)
+
+                            btn_ok.setOnClickListener {
+                                val entered_password = editText.text.toString()
+                                if (entered_password.equals(password)) {
+                                    lifecycleScope.launch {
+                                        notesDB.noteDAO().deleteAllNotes(it1)
+                                        dialog_confirm.apply {
+                                            dismiss()
+                                            cancel()
+                                        }
+                                        helper.showToast(
+                                            resources.getString(R.string.notes_deleted),
+                                            0
+                                        )
+                                    }
+                                } else {
+                                    helper.showToast(resources.getString(R.string.mis_match), 0)
+                                    dialog_confirm.apply {
+                                        dismiss()
+                                        cancel()
+                                    }
+                                    dialog.apply {
+                                        dismiss()
+                                        cancel()
+                                    }
+                                }
+                            }
+
+                            btn_cancel.setOnClickListener {
+                                dialog_confirm.apply {
+                                    dismiss()
+                                    cancel()
+                                }
+                            }
+
+                        }
                         dialog.apply {
                             dismiss()
                             cancel()
@@ -287,22 +345,75 @@ class SettingFragment : Fragment(), ClickListener {
             }
 
             7 -> {
-                val dialog = helper.showDialog(requireContext(),R.layout.delete_dialog,Gravity.CENTER)
+                val dialog = helper.showDialog(
+                    requireContext(),
+                    R.layout.delete_dialog,
+                    Gravity.CENTER,
+                    false
+                )
                 val img = dialog.findViewById<ImageView>(R.id.img_icon)
                 val txt_title = dialog.findViewById<TextView>(R.id.txt_dialog_title)
                 val txt_msg = dialog.findViewById<TextView>(R.id.txt_dialog_msg)
                 val btn_del = dialog.findViewById<Button>(R.id.btn_delete)
                 val btn_cancel = dialog.findViewById<Button>(R.id.btn_cancel)
 
+                img.setImageResource(R.drawable.remove_dialog)
+                img.setColorFilter(resources.getColor(R.color.red, context?.theme))
+
                 txt_title.setText(resources.getString(R.string.delete_account_title))
                 txt_msg.setText(resources.getString(R.string.delete_account_msg))
 
                 btn_del.setOnClickListener {
                     lifecycleScope.launch {
-                        helper.getUserID()?.let {
-                            notesDB.noteDAO().deleteAllNotes(it)
-                            notesDB.userDAO().deleteById(it)
-                            helper.navigateToFragment(LoginFragment())
+                        helper.getUserID()?.let { it1 ->
+                            val password = notesDB.userDAO().getUserPassword(it1)
+                            Log.d("Password", password)
+                            val dialog_confirm = helper.showDialog(
+                                requireContext(),
+                                R.layout.confirmation_dialog,
+                                Gravity.CENTER,
+                                false
+                            )
+                            val editText = dialog_confirm.findViewById<EditText>(R.id.txt_pass)
+                            val btn_ok = dialog_confirm.findViewById<Button>(R.id.btn_ok)
+                            val btn_cancel = dialog_confirm.findViewById<Button>(R.id.btn_cancel)
+
+                            btn_ok.setOnClickListener {
+                                val entered_password = editText.text.toString()
+                                if (entered_password.equals(password)) {
+                                    lifecycleScope.launch {
+                                        notesDB.noteDAO().deleteAllNotes(it1)
+                                        notesDB.userDAO().deleteById(it1)
+                                        dialog_confirm.apply {
+                                            dismiss()
+                                            cancel()
+                                        }
+                                        helper.showToast(
+                                            resources.getString(R.string.user_deleted),
+                                            0
+                                        )
+                                        helper.navigateToFragment(LoginFragment())
+                                    }
+                                } else {
+                                    helper.showToast(resources.getString(R.string.mis_match), 0)
+                                    dialog_confirm.apply {
+                                        dismiss()
+                                        cancel()
+                                    }
+                                    dialog.apply {
+                                        dismiss()
+                                        cancel()
+                                    }
+                                }
+                            }
+
+                            btn_cancel.setOnClickListener {
+                                dialog_confirm.apply {
+                                    dismiss()
+                                    cancel()
+                                }
+                            }
+
                         }
                         dialog.apply {
                             dismiss()
