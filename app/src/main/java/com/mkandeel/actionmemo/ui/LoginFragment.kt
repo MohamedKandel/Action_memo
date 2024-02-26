@@ -123,6 +123,11 @@ class LoginFragment : Fragment(), ClickListener {
                         img_array
                     )
                     notesDB.userDAO().registerUser(googleUser)
+                    val extras = Bundle()
+                    extras.putString(ID,"122M2222")
+                    helper.setUserID("122M2222")
+                    println(helper.getUserID())
+                    helper.navigateToFragment(HomeFragment())
                 } else {
                     helper.showToast(resources.getString(R.string.incorrect), 0)
                     binding.txtUsername.text?.clear()
