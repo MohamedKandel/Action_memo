@@ -145,8 +145,12 @@ class RegisterFragment : Fragment() {
                         img_array = stream.toByteArray()
                     }
                     val user = User(ID, username, password, mail, birthDate, img_array)
-                    notesDB.userDAO().registerUser(user)
-                    helper.navigateToFragment(LoginFragment())
+                    if (username.equals("Google") || password.equals("Google@123") || mail.equals("Google@gmail.com")) {
+                        helper.showToast(resources.getString(R.string.incorrect),0)
+                    } else {
+                        notesDB.userDAO().registerUser(user)
+                        helper.navigateToFragment(LoginFragment())
+                    }
                 } else {
                     helper.showToast(resources.getString(R.string.complete_required), 0)
                 }

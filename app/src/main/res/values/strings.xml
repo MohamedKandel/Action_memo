@@ -73,7 +73,9 @@
     <string name="request_pic">if you contacting us for technical issue, this photo will help us to solve your problem\nplease take a screenshot for your problem and attach it with this message</string>
     <string name="browse">Browse</string>
     <string name="title_hint">ex: problem with adding new note, improvement suggestion</string>
-
+    <string name="pleasure_msg">We received your message and we are happy for contacting with you and hope you contact with us again\nwe will reply to your message as soon as possible</string>
+    <string name="new_message">New Message received</string>
+    <string name="pleasure_title">Message received to our team</string>
 
     <string name="eg">Eman Guide</string>
     <string name="pm">Password manager</string>

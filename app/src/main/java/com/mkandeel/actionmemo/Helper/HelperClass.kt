@@ -9,15 +9,14 @@ import android.content.SharedPreferences.Editor
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.Window
+import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -28,17 +27,12 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mkandeel.actionmemo.Helper.Constants.ID
 import com.mkandeel.actionmemo.Helper.Constants.LANG
 import com.mkandeel.actionmemo.Helper.Constants.MODE
 import com.mkandeel.actionmemo.R
-import java.io.BufferedReader
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.io.FileInputStream
-import java.io.InputStreamReader
-import java.lang.ref.WeakReference
 import java.util.Locale
 import kotlin.random.Random
 
@@ -132,6 +126,16 @@ class HelperClass {
             if (list.contains(id)) {
                 generateID(list, length)
             }
+        }
+        return id
+    }
+
+    fun generateID(): String {
+        var id = "-"
+        val sequence = "ZXCVBNMASDFGHJKLQWERTYUIOP0123456789zxcvbnmasdfghjklqwertyuiop-_"
+        for (i in 0..<19) {
+            val char = sequence[Random.nextInt(0, sequence.length)]
+            id += char
         }
         return id
     }
@@ -293,5 +297,11 @@ class HelperClass {
 
     fun openGooglePlay(url: String) {
         activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    }
+
+    fun getFileExtn(uri: Uri?): String? {
+        val cr = context.contentResolver
+        val mtm = MimeTypeMap.getSingleton()
+        return mtm.getExtensionFromMimeType(cr.getType(uri!!))
     }
 }

@@ -3,6 +3,8 @@ package com.mkandeel.actionmemo.ui
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -29,6 +31,7 @@ import com.mkandeel.actionmemo.Room.NotesDB
 import com.mkandeel.actionmemo.Room.users.User
 import com.mkandeel.actionmemo.databinding.FragmentLoginBinding
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 class LoginFragment : Fragment(), ClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +45,7 @@ class LoginFragment : Fragment(), ClickListener {
     private lateinit var adapter: SavedUserAdapter
     private lateinit var dialog: Dialog
 
-    private fun isDialogInitialized():Boolean {
+    private fun isDialogInitialized(): Boolean {
         return this::dialog.isInitialized
     }
 
@@ -70,7 +73,7 @@ class LoginFragment : Fragment(), ClickListener {
             if (users.isNotEmpty()) {
                 context?.let { it1 ->
                     dialog = BottomSheetDialog(requireContext())
-                    val view = layoutInflater.inflate(R.layout.dialog_users,null,false)
+                    val view = layoutInflater.inflate(R.layout.dialog_users, null, false)
                     //dialog = helper.showDialog(it1, R.layout.dialog_users, Gravity.BOTTOM,true)
                     val rv = view.findViewById<RecyclerView>(R.id.users_recyclerView)
                     rv.adapter = adapter
@@ -104,6 +107,22 @@ class LoginFragment : Fragment(), ClickListener {
                     helper.setUserID(id)
                     println(helper.getUserID())
                     helper.navigateToFragment(HomeFragment(), extras)
+                } else if (username.equals("Google") && password.equals("Google@123")) {
+                    val drawable =
+                        resources.getDrawable(R.drawable.default_avatar, context?.theme)
+                    val bitmap = (drawable as BitmapDrawable).bitmap
+                    val stream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                    val img_array = stream.toByteArray()
+                    val googleUser = User(
+                        "122M2222",
+                        "Google",
+                        "Google@123",
+                        "Google@gmail.com",
+                        "07/07/2007",
+                        img_array
+                    )
+                    notesDB.userDAO().registerUser(googleUser)
                 } else {
                     helper.showToast(resources.getString(R.string.incorrect), 0)
                     binding.txtUsername.text?.clear()
@@ -162,7 +181,7 @@ class LoginFragment : Fragment(), ClickListener {
         val password = extras?.getString(PASSWORD)
         val userID = extras?.getString(ID)
         val confirmDialg =
-            helper.showDialog(requireContext(), R.layout.confirmation_dialog, Gravity.CENTER,false)
+            helper.showDialog(requireContext(), R.layout.confirmation_dialog, Gravity.CENTER, false)
         val btn_ok = confirmDialg.findViewById<Button>(R.id.btn_ok)
         val btn_cancel = confirmDialg.findViewById<Button>(R.id.btn_cancel)
         val txt = confirmDialg.findViewById<EditText>(R.id.txt_pass)
@@ -179,7 +198,7 @@ class LoginFragment : Fragment(), ClickListener {
                     }
                 }
             } else {
-                helper.showToast(resources.getString(R.string.mis_match),0)
+                helper.showToast(resources.getString(R.string.mis_match), 0)
                 txt.text?.clear()
             }
         }

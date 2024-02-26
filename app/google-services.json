@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "161890672421",
+    "project_id": "action-memo-2e3ff",
+    "storage_bucket": "action-memo-2e3ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161890672421:android:bdabf63d2d8fd1638644cc",
+        "android_client_info": {
+          "package_name": "com.mkandeel.actionmemo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfL42FJzhEK1Rj-RGKOJstBimeS3yvefg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161890672421:android:082d3108d3da78b48644cc",
+        "android_client_info": {
+          "package_name": "com.mkandeel.actionmemoadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfL42FJzhEK1Rj-RGKOJstBimeS3yvefg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -47,4 +47,7 @@ interface DAO {
 
     @Query("select email from users where id= :id")
     suspend fun getUserMail(id: String):String
+
+    @Query("select username from users where id= :id")
+    suspend fun getUsername(id: String):String
 }
