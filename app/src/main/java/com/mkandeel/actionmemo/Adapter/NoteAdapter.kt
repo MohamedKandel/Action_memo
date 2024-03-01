@@ -36,11 +36,7 @@ class NoteAdapter(
             .inflate(R.layout.note_layout, parent, false)
         return ViewHolder(view)
     }
-
-    /*
-    في صباح اليوم ذهبن الى الحضانة و كنت عايز انام نفسي يجي اليوم اللي ماروحش فيه الحضانة بس اقبض برضه
-     */
-
+    
     override fun getItemCount(): Int {
         return list.size
     }
