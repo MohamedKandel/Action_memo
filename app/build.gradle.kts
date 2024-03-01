@@ -14,8 +14,8 @@ android {
         applicationId = "com.mkandeel.actionmemo"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 4
+        versionName = "2.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -75,7 +75,7 @@ dependencies {
     // circular imageView
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
@@ -88,6 +88,12 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-messaging:23.4.1")
-    implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("com.google.firebase:firebase-database:20.3.1")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+
+    // in app update
+    implementation("com.google.android.play:app-update:2.1.0")
+    // For Kotlin users also import the Kotlin extensions library for Play In-App Update:
+    implementation("com.google.android.play:app-update-ktx:2.1.0")
+
 }

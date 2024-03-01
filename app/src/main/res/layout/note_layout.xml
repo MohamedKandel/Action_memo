@@ -40,6 +40,34 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp" />
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true">
+                <ImageView
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:src="@drawable/hole"
+                    android:id="@+id/hole_1"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/body"/>
+                <ImageView
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:src="@drawable/hole"
+                    android:id="@+id/hole_2"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/body"/>
+                <ImageView
+                    android:layout_width="@dimen/_20ssp"
+                    android:layout_height="@dimen/_20ssp"
+                    android:src="@drawable/hole"
+                    android:id="@+id/hole_3"
+                    android:layout_alignParentBottom="true"
+                    android:contentDescription="@string/body"/>
+            </RelativeLayout>
+
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

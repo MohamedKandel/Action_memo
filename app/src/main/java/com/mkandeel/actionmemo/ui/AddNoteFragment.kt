@@ -3,6 +3,7 @@ package com.mkandeel.actionmemo.ui
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -89,6 +90,11 @@ class AddNoteFragment : Fragment() {
             setPriority(clickedNote?.priority)
 
             binding.btnSave.setOnClickListener {
+                if (priority == -1) {
+                    if (clickedNote?.priority != null) {
+                        priority = clickedNote.priority
+                    }
+                }
                 val id = clickedNote?.id
                 val title = binding.txtTitle.text.toString()
                 val body = binding.txtBody.text.toString()

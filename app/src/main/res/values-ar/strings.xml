@@ -77,6 +77,8 @@
     <string name="pleasure_title">تم ارسال رسالتك لفريقنا</string>
 
     <string name="pleasure_msg">لقد استلمنا رسالتك وسعداء بتواصلك معنا ونتمنى تواصلك معنا دائمًا\nسيتم الرد على رسالتك في اقرب وقت ممكن</string>
+    <string name="successful_update">تم تثبيت التحديث بنجاح</string>
+    <string name="text_copied">تم نسخ النص</string>
     <string name="eg">دليل الايمان</string>
     <string name="pm">مدير كلمات المرور</string>
     <string name="qr">قارئ QR</string>

@@ -1,7 +1,11 @@
 package com.mkandeel.actionmemo.Helper
 
+import android.R.attr.label
+import android.R.attr.text
 import android.app.Activity
 import android.app.Dialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,7 +13,9 @@ import android.content.SharedPreferences.Editor
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -24,6 +30,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
@@ -35,6 +42,7 @@ import java.io.ByteArrayOutputStream
 import java.io.FileInputStream
 import java.util.Locale
 import kotlin.random.Random
+
 
 class HelperClass {
     private lateinit var fragment: Fragment
@@ -259,6 +267,25 @@ class HelperClass {
         return dialog
     }
 
+    fun showTransparentDialog(
+        context: Context,
+        dialogLayout: Int,
+        gravity: Int,
+        withAnimation: Boolean
+    ): Dialog {
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(dialogLayout)
+        dialog.show()
+        dialog.window?.setLayout(MATCH_PARENT, WRAP_CONTENT)
+        if (withAnimation) {
+            dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
+        }
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setGravity(gravity)
+        return dialog
+    }
+
     fun showToast(resID: String, lenght: Int) {
         if (lenght == 0) {
             Toast.makeText(context, resID, Toast.LENGTH_SHORT).show()
@@ -303,5 +330,11 @@ class HelperClass {
         val cr = context.contentResolver
         val mtm = MimeTypeMap.getSingleton()
         return mtm.getExtensionFromMimeType(cr.getType(uri!!))
+    }
+
+    fun copyTextToClipboard(label: String, text: String) {
+        val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText(label, text)
+        clipboard.setPrimaryClip(clip)
     }
 }

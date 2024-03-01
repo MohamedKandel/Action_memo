@@ -138,7 +138,7 @@ class SettingFragment : Fragment(), ClickListener {
                 val arr = resources.getStringArray(R.array.languages)
                 lifecycleScope.launch {
                     val currentState = helper.getLangFromSP()
-                    helper.showToast(currentState, 0)
+                    //helper.showToast(currentState, 0)
                     val builder = AlertDialog.Builder(requireContext())
                     if (currentState.contains("en")) {
                         builder.setSingleChoiceItems(
@@ -195,7 +195,7 @@ class SettingFragment : Fragment(), ClickListener {
                 val arr = resources.getStringArray(R.array.mode)
                 lifecycleScope.launch {
                     val currentState = helper.getTheme()
-                    helper.showToast("$currentState", 0)
+                    //helper.showToast("$currentState", 0)
                     val builder = AlertDialog.Builder(requireContext())
                     if (!currentState) {
                         builder.setSingleChoiceItems(
